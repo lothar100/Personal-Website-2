@@ -1,0 +1,14 @@
+﻿@if (Data != null && string.IsNullOrWhiteSpace(Data.badges) == false)
+{
+    <div class="badge-group">
+        @foreach (var badgeInfo in Data.ParseBadges())
+        {
+            <span class="badge badge-pill badge-@badgeInfo.Style align-middle">@badgeInfo.Text</span>
+        }
+    </div>
+}
+
+@code {
+    [Parameter]
+    public ModuleData? Data { get; set; }
+}

@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Personal Cloud Web Application
+
+Resources:
+
+  AspNetCoreFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: PersonalWebsite2.Server
+      Runtime: dotnet6
+      CodeUri: ""
+      MemorySize: 1024
+      Timeout: 30
+      Architectures:
+        - arm64
+      Policies:
+        - AWSLambda_FullAccess
+        - AmazonDynamoDBFullAccess
+        - AmazonSNSFullAccess
+        - arn:aws:iam::178778217786:policy/PersonalCloudLambdaPolicy
+      Events:
+        ProxyResource:
+          Type: HttpApi
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+        RootResource:
+          Type: HttpApi
+          Properties:
+            Path: /
+            Method: ANY

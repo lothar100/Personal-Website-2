@@ -1,0 +1,109 @@
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+:root {
+    --custom-white: #f8f9faff;
+    --custom-gray: #bdc1c6ff;
+    --custom-darkgray: #1e1e1fff;
+    --custom-black: #121212;
+    --custom-border: #f82bde;
+    --custom-bg: #90faff;
+    /*Dark*/
+    --title-text: var(--custom-black);
+    --heading-text: var(--custom-black);
+    --menu-text: var(--custom-black);
+    --regular-text: var(--custom-black);
+    /*Warm Dark*/
+    /*Neutral*/
+    /*Warm Light*/
+    /*Light*/
+    --page-bg: var(--custom-white);
+    --topbar-bg: var(--custom-white);
+    --card-bg: var(--custom-white);
+    /*button primary*/
+    --button-bg: var(--custom-white);
+    --button-text-hover: var(--custom-white);
+    --button-outline-hover: var(--custom-white);
+    /*button secondary*/
+    --button-bg-hover: var(--custom-black);
+    --button-text: var(--custom-black);
+    --button-outline: var(--custom-black);
+}
+
+html, body {
+    background-color: var(--page-bg);
+    color: var(--title-text);
+}
+
+a {
+    color: var(--menu-text);
+}
+
+.animated-icon span {
+    background-color: var(--menu-text);
+}
+
+.card {
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px 0px, 0 8px 24px 0 rgba(0, 0, 0, 0);
+}
+
+.custom-topBar {
+    background-color: var(--topbar-bg);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px 0px, 0 3px 10px 0 rgba(0, 0, 0, 0);
+}
+
+.custom-topBar {
+    background-color: var(--topbar-bg);
+}
+
+.custom-slideTray {
+    background-color: var(--page-bg);
+}
+
+.cardCollapse-button {
+    --aug-border: 2px;
+    --aug-border-bg: var(--custom-black);
+    --aug-inset-bg: var(--page-bg);
+    z-index: 2;
+}
+
+.more-summary {
+    --aug-border: 1px;
+    --aug-border-bg: black;
+    --aug-inset-bg: var(--page-bg);
+}
+
+.nav-link {
+    color: black !important;
+}
+
+    .nav-link:hover {
+        background-color: white !important;
+        border: 1px solid black !important;
+        margin-left: -0.5px !important;
+    }
+
+.nav-item .btn {
+    color: black !important;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-color: var(--regular-text);
+    color: var(--regular-text);
+}
+
+h3.card-title {
+    color: var(--heading-text);
+}
+
+.btn-outline-dark {
+    color: var(--button-text);
+    background-color: var(--button-bg);
+    border-color: var(--button-outline);
+}
+
+    .btn-outline-dark:hover {
+        color: var(--button-text-hover);
+        background-color: var(--button-bg-hover);
+        border-color: black;
+    }

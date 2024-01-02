@@ -1,0 +1,10 @@
+{
+  "profile": "default",
+  "region": "us-east-2",
+  "configuration": "Release",
+  "s3-prefix": "personal_cloud_backend/",
+  "template": "serverless.yaml",
+  "template-parameters": "",
+  "stack-name": "personal-cloud",
+  "s3-bucket": "personal-cloud-deployments"
+}

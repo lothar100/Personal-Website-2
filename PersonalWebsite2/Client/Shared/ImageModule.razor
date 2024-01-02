@@ -1,0 +1,10 @@
+﻿
+@if (Data != null && Data.count == 1 && Data.subType == ImageTypes.Inside)
+{
+    <img class="card-img @Data.css" src="./images/@Data.name">
+}
+
+@code {
+    [Parameter]
+    public ModuleData? Data { get; set; }
+}

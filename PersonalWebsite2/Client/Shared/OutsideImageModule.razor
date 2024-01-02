@@ -1,0 +1,11 @@
+﻿@if (Data != null && Data.count == 1 && Data.subType == ImageTypes.Outside)
+{
+    <div class="col-md-auto">
+        <img class="@Data.css" src="./images/@Data.name">
+    </div>
+}
+
+@code {
+    [Parameter]
+    public ModuleData Data { get; set; }
+}

@@ -1,0 +1,385 @@
+﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+html, body {
+    font-family: "Roboto";
+    transition: 0.2s;
+}
+
+a {
+    cursor: pointer;
+}
+
+a:hover {
+    color: dimgrey;
+}
+
+a:not([href]):not([tabindex]):hover {
+    color: dimgrey;
+}
+
+.btn-outline-dark {
+    border: none;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.card {
+    border: none;
+}
+
+.card-title {
+    font-family: "CODE";
+    font-weight: bold;
+    display: inline-block;
+}
+
+.custom-body {
+    padding-top: 134px;
+}
+
+.education-indent {
+    text-indent:10px;
+}
+
+@media (min-width: 576px){
+    .education-indent {
+        text-indent: 3px;
+    }
+}
+
+.education-indent-minor {
+    text-indent: 55px;
+}
+
+@media (min-width: 576px) {
+    .education-indent-minor {
+        text-indent: 10px;
+    }
+}
+
+.custom-nav {
+    position: absolute;
+    bottom: 18px;
+    right: 24px;
+    z-index: 4;
+}
+
+.custom-textarea {
+    resize: none;
+    white-space: pre;
+    overflow-wrap: normal;
+}
+
+.cardCollapse-button {
+    --aug-tl: 10px;
+    --aug-tl-width: 10%;
+    --aug-tr: 10px;
+    --aug-tr-width: 10%;
+    width: 100px;
+    margin: auto;
+    padding: 2px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1;
+    position: absolute;
+    left: calc( 50% - 50px);
+    transform: translateY(-23px);
+}
+
+.button-placeholder {
+    width: 100px;
+    height: 30px;
+}
+
+.btn-download {
+    margin-bottom: 10px;
+}
+
+.badge-pill {
+    margin-top: -18px;
+    margin-left: 5px;
+    font-weight: lighter;
+}
+
+.badge-group {
+    display: inline-block;
+}
+
+@media screen and (max-width: 480px) {
+    .badge-group {
+        display: block;
+    }
+}
+
+.more-summary {
+    --aug-tl: 10px;
+    --aug-tr: 10px;
+}
+
+.more-transition {
+    position: relative;
+    overflow: hidden;
+    transition: height .7s ease, width .5s ease, padding .7s ease;
+}
+
+.area-transition {
+    position: relative;
+    overflow: hidden;
+    transition: height .7s ease, width .5s ease;
+    margin: auto;
+}
+
+.maxWidth288 {
+    max-width: 288px;
+}
+
+input.card-title {
+    font-family: "Roboto";
+    font-weight: normal;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.form-control {
+    display: inline-block;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.oi-arrow-thick-right {
+    -webkit-transform: rotate(-45deg) scale(0.5);
+    -moz-transform: rotate(-45deg) scale(0.5);
+    -o-transform: rotate(-45deg) scale(0.5);
+    transform: rotate(-45deg) scale(0.5);
+}
+
+.img-grid-module {
+    max-width: 80%;
+    margin: auto;
+}
+
+    .img-grid-module .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .img-grid-module .col {
+        flex: 25%;
+        max-width: 25%;
+        margin: auto;
+    }
+
+    .img-grid-module img {
+        margin-top: 30px;
+        vertical-align: middle;
+        width: 100%;
+    }
+
+@media screen and (max-width: 1200px) {
+    .img-grid-module {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .img-grid-module .col {
+        flex: 50%;
+        max-width: 50%;
+    }
+
+    .img-grid-module {
+        max-width: 80%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .img-grid-module .col {
+        max-width: 80%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .img-grid-module {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .img-grid-module .col {
+        flex: 100%;
+    }
+}
+
+.img-self {
+    max-width: 200px;
+    max-height: 200px;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: block;
+}
+
+.img-farm {
+    max-width: 300px;
+    max-height: 400px;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: block;
+}
+
+.img-rit {
+    width: 45px;
+    height: 45px;
+    padding: 5px;
+    float: left;
+}
+
+.img-pluralsight {
+    max-width: 800px;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: block;
+}
+
+.videoWrapper {
+    position: relative;
+    padding-bottom: calc(56.25% + .75rem);
+    height: 100%;
+    max-width: 578px;
+    margin: auto;
+    display: block;
+}
+
+@media (min-width: 576px) {
+    .videoWrapper {
+        padding-bottom: calc(325.125px + .75rem);
+    }
+}
+
+    .videoWrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .video {
+        max-height: 325.125px;
+        max-width: 578px;
+    }
+
+    .unshrunk-lg {
+        font-size: 40px;
+        transition: 0.4s;
+    }
+
+    .unshrunk-md {
+        font-size: 28px;
+        margin-top: -19px;
+        transition: 0.4s;
+    }
+
+    .unshrunk-sm {
+        font-size: 24px;
+        margin-top: -15px;
+        transition: 0.4s;
+    }
+
+    .shrunk-lg {
+        font-size: 20px;
+        transition: 0.4s;
+    }
+
+    .shrunk-md {
+        font-size: 14px;
+        margin-top: -12px;
+        transition: 0.4s;
+    }
+
+    .shrunk-sm {
+        font-size: 12px;
+        margin-top: -10px;
+        transition: 0.4s;
+    }
+
+    app {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main {
+        flex: 1;
+    }
+
+    .content {
+        padding-top: 1.1rem;
+    }
+
+    .navbar-toggler {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+ul {
+    list-style-type: none;
+}
+
+    .validation-message {
+        position: relative;
+        display: inline-block;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        padding: .25rem !important;
+        margin: 0 !important;
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        font-size: 10px;
+        font-weight: bolder;
+        max-width: 576px;
+    }
+
+    #blazor-error-ui {
+        background: lightyellow;
+        color: #212529;
+        bottom: 0;
+        box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+        display: none;
+        left: 0;
+        padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+    }
+
+        #blazor-error-ui a {
+            color: #007bff;
+        }
+
+        #blazor-error-ui .dismiss {
+            cursor: pointer;
+            position: absolute;
+            right: 0.75rem;
+            top: 0.5rem;
+        }

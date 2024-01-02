@@ -1,0 +1,41 @@
+﻿@inject SpaService _SPA
+@inject IJSRuntime _JSRuntime
+@page "/"
+
+@if (Modules == null)
+{
+    <div class="container pb-3">Loading...</div>
+}
+else if (Modules.Any())
+{
+    var sortingNumbers = Modules.Select(x => x.sortOrder).Distinct();
+
+    foreach (int sortNum in sortingNumbers)
+    {
+        var currentData = Modules.Where(x => x.sortOrder == sortNum).ToList();
+        <PageModule Data="currentData" IsAdminView="false" />
+    }
+
+    <ContactEmail />
+
+}
+
+@code {
+
+    private List<ModuleData>? Modules;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Modules = await _SPA.GetAllAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (Modules != null && _SPA.TargetId != null)
+        {
+            await _JSRuntime.InvokeVoidAsync("helper.scrollIntoView", _SPA.TargetId);
+            _SPA.TargetId = null;
+        }
+    }
+
+}

@@ -1,0 +1,10 @@
+﻿
+@if (Data != null && string.IsNullOrWhiteSpace(Data.title) == false)
+{
+    <span class="h3 align-middle card-title">@((MarkupString)Data.title)</span>
+}
+
+@code {
+    [Parameter]
+    public ModuleData? Data { get; set; }
+}

@@ -1,0 +1,88 @@
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+:root {
+    --custom-white: #f8f9faff;
+    --custom-gray: #bdc1c6ff;
+    --custom-darkgray: #1e1e1fff;
+    --custom-black: #121212;
+    --sunglow: #FFCB1D;
+    /*Dark*/
+    --topbar-bg: var(--custom-black);
+    --page-bg: var(--custom-black);
+    /*Warm Dark*/
+    --card-bg: var(--custom-darkgray);
+    /*Neutral*/
+    --regular-text: var(--custom-grey);
+    /*Warm Light*/
+    /*Light*/
+    --title-text: var(--custom-white);
+    --heading-text: var(--custom-white);
+    --menu-text: var(--custom-white);
+    /*button primary*/
+    --button-bg: var(--custom-black);
+    --button-text-hover: var(--custom-black);
+    --button-outline-hover: var(--custom-black);
+    /*button secondary*/
+    --button-bg-hover: var(--custom-white);
+    --button-text: var(--custom-white);
+    --button-outline: var(--custom-white);
+}
+
+html, body {
+    background-color: var(--page-bg);
+    color: var(--title-text);
+}
+
+a {
+    color: var(--menu-text);
+}
+
+.animated-icon span {
+    background-color: var(--menu-text);
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.custom-topBar {
+    background-color: var(--topbar-bg);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.custom-slideTray {
+    background-color: var(--page-bg);
+}
+
+.cardCollapse-button {
+    --aug-inset-bg: 2px;
+    --aug-inset-bg: var(--page-bg);
+    --aug-border: 2px;
+    --aug-border-bg: gold;
+}
+
+.more-summary {
+    --aug-inset-bg: var(--page-bg);
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-color: var(--regular-text);
+    color: var(--regular-text);
+}
+
+h3.card-title {
+    color: var(--heading-text);
+}
+
+.btn-outline-dark {
+    color: var(--button-text);
+    background-color: var(--button-bg);
+    border-color: var(--button-outline);
+}
+
+    .btn-outline-dark:hover {
+        color: var(--button-text-hover);
+        background-color: var(--button-bg-hover);
+        border-color: black;
+    }

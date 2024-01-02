@@ -1,0 +1,115 @@
+﻿@inject SpaService _SPA
+@inject IJSRuntime _JSRuntime
+@implements IDisposable
+
+<div class="navbar-light custom-nav">
+
+    <div class="animated-icon @NavOpen" @onclick="ToggleNavMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div id="slideTray" class="@NavCollapse @NavSlide custom-slideTray mt-3" style="@Style @Visible" @onclick="ToggleNavMenu">
+        <ul class="nav flex-column">
+
+            <li class="nav-item px-3">
+                <AnchorLink class="nav-link" href="#main">
+                    <span class="oi oi-home" aria-hidden="true"></span> Home
+                </AnchorLink>
+            </li>
+
+            @if (Modules != null)
+            {
+                @foreach (var module in Modules.Where(module => module.moduleType == ModuleTypes.Link && module.active).OrderBy(module => module.sortOrder))
+                {
+                    if ((string.IsNullOrWhiteSpace(module.id) && string.IsNullOrWhiteSpace(module.text)) == false)
+                    {
+                        var linkId = $"#{module.id}";
+                        var glyph = string.IsNullOrWhiteSpace(module.glyph) ? "oi-terminal" : module.glyph;
+
+                        <li class="nav-item px-3">
+                            <AnchorLink class="nav-link" href="@linkId">
+                                <span class="oi @glyph" aria-hidden="true"></span> @module.text
+                            </AnchorLink>
+                        </li>
+                    }
+                }
+            }
+
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" @onclick="ToggleDarkMode">
+                    <span class="oi oi-contrast" aria-hidden="true"></span>@NavTheme
+                </NavLink>
+            </li>
+
+            <li class="nav-item px-3">
+                <a class="btn btn-success btn-sm btn-download" href="downloads/ResumeLangevoort.docx" download="ResumeLangevoort.docx" target="_top">
+                    <span class="oi oi-data-transfer-download" aria-hidden="true"></span> Download Resume
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+@code {
+    private List<ModuleData>? Modules;
+    private string Style => $"right: -{Width}px;";
+    private string Visible = "visibility: hidden;";
+    private int Width = 0;
+
+    protected override void OnInitialized()
+    {
+        SpaService.OnUpdate += UpdateModules;
+    }
+
+    public void Dispose()
+    {
+        SpaService.OnUpdate -= UpdateModules;
+    }
+
+    private async Task UpdateModules()
+    {
+        //-- ServiceModules relies on OnInitialized from index.razor
+        Modules = _SPA.ServiceModules;
+        StateHasChanged();
+        await Task.CompletedTask;
+    }
+
+    private bool isClosed = true;
+
+    private string? NavCollapse = "collapse";
+
+    private string NavSlide => isClosed ? "slide-in" : "slide-out";
+
+    private string? NavOpen => isClosed ? null : "open";
+
+    private string darkMode = "enabled";
+
+    private string NavTheme => darkMode.Equals("disabled") ? " Dark Mode" : " Light Mode";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        NavCollapse = null; //-- collapsed until page loads, then sliding animation handles show/hide
+        darkMode = await _JSRuntime.InvokeAsync<string>("darkMode.status", null);
+        if (Width == 0 && Modules != null)
+        {
+            Width = await _JSRuntime.InvokeAsync<int>("helper.getWidth", "slideTray");
+            Width += 2;
+            StateHasChanged();
+        }
+    }
+
+    private void ToggleNavMenu()
+    {
+        Visible = string.Empty; //-- keeps tray invisible until the width has been calculated properly
+        isClosed = !isClosed;
+    }
+
+    private async Task ToggleDarkMode()
+    {
+        await _JSRuntime.InvokeVoidAsync("darkMode.toggle");
+    }
+}

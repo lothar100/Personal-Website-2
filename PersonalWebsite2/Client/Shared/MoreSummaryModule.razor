@@ -1,0 +1,122 @@
+﻿@inject IJSRuntime _JSRuntime
+@inject BrowserResizeHelper _BrowserResizeHelper
+@implements IDisposable
+
+@if (Data != null && string.IsNullOrWhiteSpace(Data.text) == false && string.IsNullOrWhiteSpace(Data.id) == false)
+{
+    <div id="@Data.id-area" class="more-summary @AreaTransition" style="visibility: hidden; position:absolute;" augmented-ui="tl-clip tr-clip exe">
+        <p id="@Data.id" class="card-text @Centered @MoreTransition" style="padding: 20px 20px 0px;">@((MarkupString)Data.text)</p>
+
+        <div class="button-placeholder"></div>
+    </div>
+
+    <div class="more-summary @AreaTransition" style="@AreaStyle" augmented-ui="tl-clip tr-clip exe">
+        <p class="card-text @Centered @MoreTransition" style="@MoreStyle">@((MarkupString)Data.text)</p>
+    </div>
+
+    <p @onclick="ToggleCollapse" style="margin-bottom: 0px;">
+        <CardCollapseButton Text="@ButtonText" Data="@Data" />
+    </p>
+}
+
+@code {
+    [Parameter]
+    public ModuleData? Data { get; set; }
+
+    private bool IsClosed = true;
+    private string ButtonText => IsClosed ? "Show More" : "Show Less";
+
+    private string AreaTransition = "area-transition";
+    private string MoreTransition = "more-transition";
+    private string AreaStyle;
+    private string MoreStyle;
+    private int AreaHeight;
+    private int MoreHeight;
+
+    private System.Threading.SemaphoreSlim UpdateLock = new System.Threading.SemaphoreSlim(1, 1);
+
+    private string Centered => ((Data?.subType ?? SummaryType.None) == SummaryType.Centered) ? "text-center" : string.Empty;
+
+    private async Task ToggleCollapse()
+    {
+        if (UpdateLock.CurrentCount == 1)
+        {
+            await UpdateLock.WaitAsync();
+            try
+            {
+                IsClosed = !IsClosed;
+                await UpdateComponents();
+                StateHasChanged();
+                await RecalculateAndUpdate();
+            }
+            finally
+            {
+                UpdateLock.Release();
+            }
+        }
+    }
+
+    private async Task UpdateComponents()
+    {
+        if (IsClosed)
+        {
+            //-- closing task
+            MoreStyle = "height: 0px; margin:auto; padding: 20px 20px 0px;";
+            AreaStyle = "height: 25px; width: 100%";
+            await Task.Delay(720);
+            MoreStyle = "height: 0px; margin: auto;";
+            AreaStyle = "height: 20px; width: 200px";
+        }
+        else
+        {
+            //-- opening task
+            MoreStyle = $"height: 0px; padding: 20px 20px 0px;";
+            AreaStyle = $"height: 25px; width: 100%";
+            await Task.Delay(520);
+            MoreStyle = $"height: {MoreHeight+60}px; padding: 20px 20px 0px;"; // needs actual height value for transition, not auto.
+            AreaStyle = $"height: {AreaHeight+16}px; width: 100%";
+        }
+    }
+
+    private async Task RecalculateAndUpdate()
+    {
+        if (UpdateLock.CurrentCount == 1)
+        {
+            await UpdateLock.WaitAsync();
+            try
+            {
+                if (string.IsNullOrWhiteSpace(Data.text) == false && string.IsNullOrWhiteSpace(Data.id) == false)
+                {
+                    MoreHeight = await _JSRuntime.InvokeAsync<int>("helper.getHeight", Data.id);
+                    AreaHeight = await _JSRuntime.InvokeAsync<int>("helper.getHeight", Data.id + "-area");
+                }
+
+                await UpdateComponents();
+                StateHasChanged();
+            } finally
+            {
+                UpdateLock.Release();
+            }
+        }
+
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && Data != null && string.IsNullOrWhiteSpace(Data.id) == false)
+        {
+            await RecalculateAndUpdate();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        BrowserResizeHelper.OnResize += RecalculateAndUpdate;
+    }
+
+    public void Dispose()
+    {
+        BrowserResizeHelper.OnResize -= RecalculateAndUpdate;
+    }
+
+}

@@ -1,0 +1,12 @@
+﻿@if (Data != null && string.IsNullOrWhiteSpace(Data.text) == false)
+{
+    <br />
+    <p class="card-text @Centered">@((MarkupString)Data.text)</p>
+}
+
+@code {
+    [Parameter]
+    public ModuleData? Data { get; set; }
+
+    private string Centered => (Data.subType == SummaryType.Centered) ? "text-center" : string.Empty;
+}

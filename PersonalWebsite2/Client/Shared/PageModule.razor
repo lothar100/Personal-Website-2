@@ -1,0 +1,66 @@
+﻿@inject SpaService _SPA
+@inject NavigationManager _NavigationManager
+
+@if (Data.Any(x => x.HasContent()))
+    {
+        <div class="container pb-3">
+            <div class="row">
+
+            <OutsideImageModule Data="@ImageData" />
+
+            @if (Data.Any(x => x.HasCardContent()))
+                {
+                    <div class="col">
+                    <div id="@LinkData?.id" class="card" style="max-width: 90rem">
+
+                            <div class="card-body">
+
+                            <TitleModule Data="@SummaryData" />
+
+                            <BadgesModule Data="@SummaryData" />
+
+                            <ImageModule Data="@ImageData" />
+
+                            <GridImageModule Data="@ImageData" />
+
+                            <VideoModule Data="@VideoData" />
+
+                            <SummaryModule Data="@SummaryData" />
+
+                            <MoreSummaryModule Data="@ToggleSummaryData" />
+
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    }
+
+@code {
+
+    [Parameter]
+    public List<ModuleData> Data { get; set; }
+
+    public ModuleData? LinkData =>
+        Data.FirstOrDefault(x => x.moduleType == ModuleTypes.Link);
+
+    public ModuleData? SummaryData =>
+        Data.FirstOrDefault(x => x.moduleType == ModuleTypes.Summary);
+
+    public ModuleData? ToggleSummaryData =>
+        Data.FirstOrDefault(x => x.moduleType == ModuleTypes.ToggleSummary);
+
+    public ModuleData? ImageData =>
+        Data.FirstOrDefault(x => x.moduleType == ModuleTypes.Image);
+
+    public ModuleData? VideoData =>
+        Data.FirstOrDefault(x => x.moduleType == ModuleTypes.Video);
+
+    [Parameter]
+    public bool? IsAdminView { get; set; }
+
+    private string colType => Data.Any(x => x.HasCardContent()) ? "col-md-auto" : "col";
+
+}
